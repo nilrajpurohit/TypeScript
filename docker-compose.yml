@@ -5,10 +5,10 @@ services:
     environment:
       - NODE_ENV=development
     volumes:
-      - ./src:/app
+      - .:/app
       - /app/node_modules
-      - /app/dist
-    working_dir: /app
+      - /app/src/dist
+    working_dir: /app/src
     command: nodemon --exec ts-node index.ts --ext ts
     stdin_open: true
     tty: true

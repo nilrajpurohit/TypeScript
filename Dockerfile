@@ -4,13 +4,13 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Copy package files
-COPY src/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install && npm install -g ts-node typescript nodemon
 
 # Copy application code
-COPY src .
+COPY src ./src
 
 # Expose port (if needed for future development)
 EXPOSE 3000
