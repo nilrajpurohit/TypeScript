@@ -1,0 +1,14 @@
+services:
+  typescript-app:
+    build: .
+    container_name: ts_runner
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./src:/app
+      - /app/node_modules
+      - /app/dist
+    working_dir: /app
+    command: nodemon --exec ts-node index.ts --ext ts
+    stdin_open: true
+    tty: true
