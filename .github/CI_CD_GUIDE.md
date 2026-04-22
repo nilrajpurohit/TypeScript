@@ -5,11 +5,11 @@ This project uses GitHub Actions for automated testing, building, and deployment
 ## 📋 Workflows Overview
 
 ### 1. **CI - Build & Test** (`ci.yml`)
-**Triggers:** Every push to `main`/`develop` and all pull requests
+**Triggers:** Every push to `main`/`dev` and all pull requests
 
 **What it does:**
-- Tests on Node.js 18.x and 20.x
-- Installs dependencies
+- Tests on Node.js 20.x
+- Installs dependencies with caching
 - Runs linting (if ESLint is configured)
 - Builds TypeScript
 - Tests Docker build
@@ -37,34 +37,6 @@ This project uses GitHub Actions for automated testing, building, and deployment
 
 ---
 
-### 3. **Docker Build & Push to Docker Hub** (`docker-hub-push.yml`)
-**Triggers:** Push to `main` branch and version tags
-
-**What it does:**
-- Builds and pushes Docker image to Docker Hub
-- Supports semantic versioning
-- Auto-tags as `latest` on default branch
-
-**Required Secrets (configure in GitHub):**
-- `DOCKER_USERNAME` - Your Docker Hub username
-- `DOCKER_PASSWORD` - Your Docker Hub access token
-
-**Image location:** `docker.io/<username>/ts-runner:latest`
-
----
-
-### 4. **Security Scan** (`security.yml`)
-**Triggers:** Push, PRs, and weekly schedule (Sundays)
-
-**What it does:**
-- Audits npm dependencies for vulnerabilities
-- Scans Docker image with Trivy
-- Reports vulnerabilities to GitHub Security tab
-
-**No secrets required**
-
----
-
 ## 🔧 Setup Instructions
 
 ### Step 1: Enable GitHub Actions
@@ -72,27 +44,7 @@ This project uses GitHub Actions for automated testing, building, and deployment
 2. Click **Settings** → **Actions** → **General**
 3. Ensure Actions are enabled
 
-### Step 2: Configure Secrets (for Docker Hub push)
-
-Only needed if you want to push to Docker Hub:
-
-1. Go to **Settings** → **Secrets and variables** → **Actions**
-2. Click **New repository secret**
-3. Add these secrets:
-   - **Name:** `DOCKER_USERNAME`  
-     **Value:** Your Docker Hub username
-   - **Name:** `DOCKER_PASSWORD`  
-     **Value:** Your Docker Hub access token (NOT password)
-
-**How to get Docker Hub token:**
-```bash
-# Create token on Docker Hub:
-# 1. Login to https://hub.docker.com
-# 2. Account Settings → Security → New Access Token
-# 3. Give it read/write permissions
-```
-
-### Step 3: Create Version Tags for Releases
+### Step 2: Create Version Tags for Releases
 
 When you want to release:
 ```bash
@@ -115,11 +67,6 @@ This triggers Docker builds with semantic versioning tags.
 1. Click on a workflow run
 2. Scroll down to see "Artifacts" section
 3. Download build artifacts (dist files)
-
-### View Security Reports
-1. Go to **Security** tab
-2. Click **Code scanning alerts**
-3. See Trivy vulnerability scan results
 
 ---
 
@@ -188,12 +135,12 @@ Replace `<USERNAME>` and `<REPO>` with your values.
 - Verify `.github/workflows/*.yml` files are committed to git
 
 ### Docker push fails?
-- Verify `DOCKER_USERNAME` and `DOCKER_PASSWORD` secrets are set correctly
-- Ensure token has read/write permissions
-- Check Docker Hub is not having service issues
+- Verify repository permissions for GHCR
+- Check GitHub Actions permissions
+- Ensure you're pushing to the correct branch
 
 ### Node version compatibility?
-- Current workflows test on Node 18.x and 20.x
+- Current workflows test on Node 20.x
 - Modify `node-version` matrix in `ci.yml` if needed
 - Dockerfile uses `node:20-alpine`
 
@@ -204,4 +151,3 @@ Replace `<USERNAME>` and `<REPO>` with your values.
 - [GitHub Actions Docs](https://docs.github.com/en/actions)
 - [Docker GitHub Actions](https://github.com/docker/build-push-action)
 - [Node.js GitHub Actions](https://github.com/actions/setup-node)
-- [Trivy Scanner](https://github.com/aquasecurity/trivy-action)
