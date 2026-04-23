@@ -1,0 +1,15 @@
+1. Type Annotation (explicit typing):
+    Type annotation is when you manually tell TypeScript what the type is.
+    Example:
+    - let age: number = 25;
+    - let name: string = "Rahul";
+    - let isActive: boolean = true;
+    Here, you explicitly wrote the types (number, string, boolean).
+
+2. Type Inference (automatic typing)
+    Type inference is when TypeScript automatically figures out the type based on the value.
+    Example:
+    - let age = 25;        // inferred as number
+    - let name = "Rahul";  // inferred as string
+    - let isActive = true; // inferred as boolean
+    You didn’t write types, but TypeScript still understands them.

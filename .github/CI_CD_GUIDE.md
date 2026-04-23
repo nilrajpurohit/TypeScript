@@ -1,3 +1,5 @@
+# IMP: Move this ".github" folder to "1. basic typescript docker setup", So this CI/CD work for project setup using docker with github action.
+
 # GitHub Actions CI/CD Pipeline
 
 This project uses GitHub Actions for automated testing, building, and deployment. Here's how it works:

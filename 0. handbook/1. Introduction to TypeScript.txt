@@ -1,4 +1,5 @@
 1. What TypeScript:
+    TypeScript is a programming language developed by Microsoft that builds on top of JavaScript by adding static typing and other powerful features. If you already know JavaScript, TypeScript will feel very familiar—but safer and more structured.
     TypeScript is a superset of JavaScript that adds features like static typing to improve code clarity, catch errors early, and enhance development. Here's a breakdown:
     - Static Typing: TypeScript allows you to define types for variables, function parameters, and return values, making it easier to catch bugs early. Example: let message: string = "Hello, world!";
     - Compile-to-JS: TypeScript needs to be compiled into JavaScript (via the TypeScript compiler tsc), allowing you to use TypeScript features while running standard JavaScript.
