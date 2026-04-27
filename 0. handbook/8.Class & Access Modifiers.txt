@@ -1,0 +1,54 @@
+1. What is Class:
+    - In TypeScript, a class is a blueprint for creating objects. It defines properties (data) and methods (functions) that work on that data. TypeScript classes are similar to JavaScript classes, but with type safety, access modifiers, and stronger structure.
+    - Example:
+    class Person {
+        name: string;
+        age: number;
+        constructor(name: string, age: number) {
+            this.name = name;
+            this.age = age;
+        }
+        greet(): string {
+            return `Hello, I'm ${this.name}`;
+        }
+    }
+    const p = new Person("Alice", 25);
+    console.log(p.greet());
+
+2. Access Modifiers:
+    1. Public: Its a default modifiers, which is accessible everywhere.
+    2. Private: Accessible only inside the class.
+    3. Proctected: Accessible in class and subclass.
+
+3. Getter & Setter:
+    - Example:
+    class User {
+        private _age: number = 0;
+        get age(): number {
+            return this._age;
+        }
+        set age(value: number) {
+            if (value > 0) this._age = value;
+        }
+    }
+
+4. Static:
+    - Belong to class, not object:
+    - Example:
+    class MathUtils {
+        static add(a: number, b: number): number {
+            return a + b;
+        }
+    }
+    console.log(MathUtils.add(2, 3));
+
+5. Abstract Class:
+    - Cannot be directly instantiated:
+    abstract class Animal {
+        abstract makeSound(): void;
+    }
+    class Dog extends Animal {
+        makeSound() {
+            console.log("Bark");
+        }
+    }

@@ -1,0 +1,16 @@
+1. What is Utility:
+    In TypeScript, “utility types” are built-in generic types that help you transform and reuse existing types instead of rewriting them.
+
+2. Types of Utility:
+    - Partial: Partial<T>
+    - Required: Required<T>
+    - Readonly: Readonly<T>
+    - Pick: Pick<T, K>
+    - Omit: Omit<T, K>
+    - Record: Record<K, T>
+    - Exclude: Exclude<T, K>
+    - Extract: Extract<T, U>
+    - NonNullable: NonNullable<T>
+    - ReturnType: ReturnType<T>
+    - Parameters: Parameters<T>
+    - Awaited: Awaited<T>

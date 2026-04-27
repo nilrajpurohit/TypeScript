@@ -60,3 +60,38 @@
     🔹 Example
     - let value: unknown = "hello";
     - let strLength: number = (value as string).length;
+
+
+
+// Short Learn theory :
+- Typescript is programming language
+- Develop by Microsoft
+- Build on top of javascript
+- Have static typing amd more powerfull features like (Improve code clearity, Catch errors on compile time, Enhance Development)
+- Feature like (Static typing, Compile to JS, Type inference, Better tooling, Advance features like type, interface, enum, generics and decorators).
+
+- Catching errors earlier
+- Better development experience
+- Enhance readablity and mantainability
+- Improved tooling, 
+- Stronger long term code health
+- Javascript superset
+
+- Static Types
+- Interface
+- Access Modifiers
+
+- Typescript is structural typed
+- Structural : In typescript if two types have the same shape then they considered as compatible, reather then with same name (can have different name).
+- Nominal: In java,c# if two class name are same then only considered as compatible.
+
+
+- Source Code (write a code in .ts or .tsx)
+- Compile Layer (compile the code using tsc compiler)
+    - Scanner (lexer) (convert raw code into tokens)
+    - Parser (AST) (convert tokens into abstract syntax tree)
+    - Binder (connects variable, function, scope and build symbol tables)
+    - Type Checker (detect error on before runtime)
+    - Transformer (convert typescript specific feature into javascript compatiable code)
+    - Emitter (output in final .js javascript file)
+- Ouput Layer (final out of .js into brower or in node.js)

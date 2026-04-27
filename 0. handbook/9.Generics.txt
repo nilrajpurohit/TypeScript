@@ -1,0 +1,32 @@
+1. What is Generics:
+    - In TypeScript, Generics let you write reusable, type-safe code that works with different data types without losing type information.
+    - Think of generics as a way to create a “type variable” instead of hardcoding a specific type.
+
+2. Why Generics?
+    - Reusability
+    - Type safety
+    - Flexibility
+
+3. Constraints in Generics:
+    - You can restrict types using extends:
+    - Example
+    function printLength<T extends { length: number }>(item: T): void {
+        console.log(item.length);
+    }
+    printLength("Hello");
+    printLength([1, 2, 3]);
+    - Works only for types that have .length.
+
+4. Real-World Example (API Response):
+    - Example
+    interface Response<T> {
+        data: T;
+        success: boolean;
+    }
+    type User = {
+        name: string;
+    };
+    const userResponse: Response<User> = {
+        data: { name: "Alice" },
+        success: true
+    };
