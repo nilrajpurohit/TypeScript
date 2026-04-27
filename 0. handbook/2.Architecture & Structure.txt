@@ -1,0 +1,91 @@
+1. Architecture of TypeScript :
+  TypeScript’s architecture isn’t just about syntax—it’s about how the language processes your code from TypeScript → JavaScript, while adding type safety along the way. It’s designed by Microsoft to sit as a layer on top of JavaScript.
+
+  At a high level, TypeScript consists of three main layers:
+  1. Source Code Layer
+  You write code in:
+  .ts (TypeScript)
+  .tsx (TypeScript + JSX for React)
+  Example:
+  - let age: number = 25;
+
+  2. Compiler Layer (Core of TypeScript)
+  The TypeScript Compiler (tsc) is the heart of the system. It transforms TypeScript into JavaScript in several stages: (Compilation Pipeline)
+    
+    a. Scanner (Lexer)
+    Converts raw code into tokens
+    Example:
+    - let x = 10;
+    - → let, identifier, =, number
+
+    b. Parser
+    Converts tokens into an Abstract Syntax Tree (AST)
+    AST represents the structure of your code
+
+    c. Binder
+    Connects variables, functions, and scopes
+    Builds symbol tables
+
+    d. Type Checker
+    The most important part
+    Ensures type correctness
+    Detects errors before runtime
+    Example:
+    - let x: number = "hello"; // Type error
+
+    e. Transformer
+    Converts TypeScript-specific features into JavaScript-compatible code
+    Example:
+    - Interfaces → removed
+    - Modern syntax → older JS (if needed)
+
+    f. Emitter
+    Outputs final JavaScript (.js) files
+
+  3. Output Layer
+  Clean JavaScript code
+  Runs in:
+  - Browsers
+  - Node.js
+
+  Architecture Diagram (Conceptual)
+  TypeScript Code (.ts)
+          ↓
+      Scanner
+          ↓
+        Parser → AST
+          ↓
+        Binder
+          ↓
+    Type Checker
+          ↓
+    Transformer
+          ↓
+      Emitter
+          ↓
+  JavaScript Code (.js)
+
+
+2. Structure of TypeScript
+  Core Components
+  1. Compiler (tsc)
+  CLI tool that compiles TS → JS
+  
+  2. Language Services
+  Powers IDE features like:
+  - Autocomplete
+  - Refactoring
+  - Error hints (used in editors like Visual Studio Code)
+  
+  3. Type System
+  Static typing engine
+  Supports:
+  - Primitive types
+  - Interfaces
+  - Generics
+  - Advanced types (union, intersection)
+  
+  4. Declaration Files (.d.ts)
+  Describe types for JavaScript libraries
+  Example:
+  - declare function greet(name: string): void;

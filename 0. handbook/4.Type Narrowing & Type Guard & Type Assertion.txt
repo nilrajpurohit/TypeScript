@@ -1,0 +1,97 @@
+1. Type Narrowing :
+    Type Narrowing in TypeScript is the process by which the TypeScript compiler refines a variable’s type from a broader type (such as a union or unknown) to a more specific type within a certain code path, based on runtime checks like typeof, instanceof, in, or custom type guards.
+    🔹 Example
+        function printValue(value: string | number) {
+            if (typeof value === "string") {
+                // TypeScript narrows value to string here
+                console.log(value.toUpperCase());
+            } else {
+                // TypeScript narrows value to number here
+                console.log(value.toFixed(2));
+            }
+        }
+    🔹 Another example with union types
+        type Dog = { bark: () => void };
+        type Cat = { meow: () => void };
+
+        function speak(animal: Dog | Cat) {
+            if ("bark" in animal) {
+                animal.bark(); // narrowed to Dog
+            } else {
+                animal.meow(); // narrowed to Cat
+            }
+        }
+
+2. Type Guard :
+    Type Guard in TypeScript is a mechanism (expression or function) used to narrow down the type of a variable within a conditional block by performing runtime checks, allowing TypeScript to determine and enforce a more specific type.
+    A type guard is a check that tells TypeScript what type a value is so it can safely use it.
+    🔹 Example using built-in type guard (typeof)
+        function printValue(value: string | number) {
+            if (typeof value === "string") {
+                // TypeScript knows value is string here
+                console.log(value.toUpperCase());
+            } else {
+                // TypeScript knows value is number here
+                console.log(value.toFixed(2));
+            }
+        }
+    🔹 Example using custom type guard
+        type Dog = { bark: () => void };
+        type Cat = { meow: () => void };
+
+        function isDog(animal: Dog | Cat): animal is Dog {
+            return (animal as Dog).bark !== undefined;
+        }
+
+        function speak(animal: Dog | Cat) {
+            if (isDog(animal)) {
+                // TypeScript narrows to Dog
+                animal.bark();
+            } else {
+                // TypeScript narrows to Cat
+                animal.meow();
+            }
+        }
+
+3. Type Assertion : 
+    Type Assertion in TypeScript is a way to tell the TypeScript compiler to treat a value as a specific type, even when TypeScript cannot automatically infer that type.
+    It is like saying “Trust me, I know what type this value is.”
+    It does not change the runtime value—it only affects how TypeScript performs type checking.
+    🔹 Example
+    - let value: unknown = "hello";
+    - let strLength: number = (value as string).length;
+
+
+
+// Short Learn theory :
+- Typescript is programming language
+- Develop by Microsoft
+- Build on top of javascript
+- Have static typing amd more powerfull features like (Improve code clearity, Catch errors on compile time, Enhance Development)
+- Feature like (Static typing, Compile to JS, Type inference, Better tooling, Advance features like type, interface, enum, generics and decorators).
+
+- Catching errors earlier
+- Better development experience
+- Enhance readablity and mantainability
+- Improved tooling, 
+- Stronger long term code health
+- Javascript superset
+
+- Static Types
+- Interface
+- Access Modifiers
+
+- Typescript is structural typed
+- Structural : In typescript if two types have the same shape then they considered as compatible, reather then with same name (can have different name).
+- Nominal: In java,c# if two class name are same then only considered as compatible.
+
+
+- Source Code (write a code in .ts or .tsx)
+- Compile Layer (compile the code using tsc compiler)
+    - Scanner (lexer) (convert raw code into tokens)
+    - Parser (AST) (convert tokens into abstract syntax tree)
+    - Binder (connects variable, function, scope and build symbol tables)
+    - Type Checker (detect error on before runtime)
+    - Transformer (convert typescript specific feature into javascript compatiable code)
+    - Emitter (output in final .js javascript file)
+- Ouput Layer (final out of .js into brower or in node.js)

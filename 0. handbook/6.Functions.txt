@@ -1,0 +1,20 @@
+1. What is function:
+    In TypeScript, a function is the same core concept as in JavaScript—a reusable block of code—but with types added for parameters and return values.
+
+2. Types of functions:
+    1. Function declaration: A function declaration is a named function that is defined using the `function` keyword. It can be called before it is defined in the code due to hoisting.
+        
+    2. Function expression: A function expression is a function that is assigned to a variable. It can be anonymous or named.
+
+    3. Arrow function: Arrow functions provide a more concise syntax for writing functions and also have lexical scoping of the `this` keyword.
+
+    4. Optional parameters: In TypeScript, you can mark parameters as optional by using the `?` symbol. Optional parameters must come after all required parameters.
+    
+    5. Default parameters: You can also provide default values for parameters. If the caller does not provide a value for that parameter, the default value will be used.
+
+    6. Rest parameters: Rest parameters allow a function to accept an arbitrary number of arguments as an array.
+
+    7. Function with Object Destructuring
+        function printUser({ name, age }: { name: string; age: number }) {
+            console.log(name, age);
+        }

@@ -1,0 +1,34 @@
+1. What is a .d.ts file in TypeScript:
+    - A .d.ts file is a Type Declaration File used to describe the types of existing JavaScript code without implementing any logic.
+    - It tells TypeScript: This function/class/module exists somewhere, and here is its type.
+
+2. Why .d.ts files are used:
+    - They are used when:
+    - You are using plain JavaScript libraries in TypeScript
+    - You want to provide type information without writing implementation
+    - You are creating library type definitions
+    - You want better IntelliSense + type safety
+
+3. Library Type Files (Real-world):
+    - Most popular JS libraries include .d.ts files:
+    - Example:
+        - lodash
+        - express
+        - react
+    - So when you install:
+        npm install lodash
+        npm install --save-dev @types/lodash
+        @types/lodash is a .d.ts package.
+
+4. When TypeScript Uses .d.ts
+    - TypeScript automatically uses .d.ts when:
+    - You import JS libraries
+    - You install @types/*
+    - You create custom type declarations
+    - You compile TS libraries (declaration: true)
+
+5. Why .d.ts is important
+    - Enables type safety for JS code
+    - Improves autocomplete (IntelliSense)
+    - Helps build reusable libraries
+    - Separates types from implementation

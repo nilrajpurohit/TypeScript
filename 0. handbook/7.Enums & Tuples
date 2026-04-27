@@ -1,0 +1,23 @@
+1. What is Enum:
+    - In TypeScript, an enum (enumeration) is a way to define a set of named constant values. It helps make code more readable and less error-prone by replacing “magic values” (like numbers or strings) with meaningful names.
+
+2. Types of Enum:
+    1. Numeric Enum (Default)
+    2. Custom Numeric Values
+    3. String Enum
+    4. Mixed Enum (Not Recommended)
+    5. Using Enums in Functions
+    6. Reverse Mapping (Numeric Enums only)
+    7. Const Enum (Optimized)
+
+3. What is Tuple:
+    - In TypeScript, a tuple is a special type of array where you know the exact number of elements and the type of each element in order.
+    - Unlike normal arrays (which have one type for all elements), tuples are fixed structure arrays.
+
+4. Types of Tuple:
+    1. Basic Tuple
+    2. Tuple with Multile Types
+    3. Tuple in Function Return
+    4. Optional Elements in Tuple
+    5. Rest Elements in Tuple
+    6. Readonly Tuple
