@@ -1,0 +1,63 @@
+1. Basic Syntax: T extends U ? X : Y
+    - A conditional type works like a type-level if statement:
+    - Example:
+    type IsString<T> = T extends string ? true : false;
+    type A = IsString<string>;  // true
+    type B = IsString<number>;  // false
+
+2. Types that depend on other types
+    - This is where conditional types shine — dynamic type logic:
+    - Example:
+    type ApiResponse<T> = T extends string ? { message: T } : { data: T };
+    type Res1 = ApiResponse<string>; 
+    // { message: string }
+    type Res2 = ApiResponse<number>; 
+    // { data: number }
+
+3. NonNullable<T> (real built-in example)
+    - Removes null and undefined:
+    - Example:
+    type MyNonNullable<T> = T extends null | undefined ? never : T;
+    type A = MyNonNullable<string | null | undefined>;
+    // string
+
+4. Distributive behavior (VERY important)
+    - When T is a union, the condition runs on each member separately:
+    - Example:
+    type ToArray<T> = T extends any ? T[] : never;
+    type Result = ToArray<string | number>;
+    // string[] | number[]
+
+5. Prevent distribution with [T] extends [U]
+    - Wrap in a tuple to stop distribution:
+    - Example:
+    type ToArrayNonDist<T> = [T] extends [any] ? T[] : never;
+    type Result = ToArrayNonDist<string | number>;
+    // (string | number)[]
+
+6. Extract<T, U> (filter IN)
+    - Keeps only types assignable to U:
+    - Example:
+    type MyExtract<T, U> = T extends U ? T : never;
+    type A = MyExtract<string | number | boolean, string | boolean>;
+    // string | boolean
+
+7. Exclude<T, U> (filter OUT)
+    - Removes types assignable to U:
+    - Example:
+    type MyExclude<T, U> = T extends U ? never : T;
+    type A = MyExclude<string | number | boolean, number>;
+    // string | boolean
+
+8. Pattern: Narrowing types
+    - Example:
+    type Flatten<T> = T extends any[] ? T[number] : T;
+    type A = Flatten<string[]>; // string
+    type B = Flatten<number>;  // number
+
+9. Pattern: Infer keyword (power move)
+    - Conditional types can extract types using infer:
+    - Example:
+    type GetReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+    type A = GetReturnType<() => string>;
+    // string

@@ -1,0 +1,78 @@
+1. What are Mapped Types:
+    - Mapped types let you transform every property of a type using keyof.
+    - Example:
+    type User = {
+        id: number;
+        name: string;
+    };
+    type Flags = {
+        [K in keyof User]: boolean;
+    };
+    // {id: boolean, name: boolean}
+
+2. Add or remove modifiers
+    - You can control readonly and optional (?) modifiers. 
+    - Add readonly:
+    type ReadonlyUser<T> = {
+        readonly [K in keyof T]: T[K];
+    };
+    - Remove readonly:
+    type Mutable<T> = {
+        -readonly [K in keyof T]: T[K];
+    };
+    - Remove optional:
+    type Required<T> = {
+        [K in keyof T]-?: T[K];
+    };
+
+3. Key remapping with as (TS 4.1+)
+    - You can rename keys during mapping:
+    - Example:
+    type Getters<T> = {
+        [K in keyof T as `get${Capitalize<string & K>}`]: T[K];
+    };
+    type User = {
+        name: string;
+        age: number;
+    };
+    type UserGetters = Getters<User>;
+    //{ getName: string, getAge: number }
+
+4. Filtering keys with as never
+    - You can remove keys during mapping:
+    - Example:
+    type RemoveId<T> = {
+        [K in keyof T as K extends "id" ? never : K]: T[K];
+    };
+    type User = {
+        id: number;
+        name: string;
+    };
+    type Result = RemoveId<User>;
+    // { name: string }
+
+5. Homomorphic vs Non-Homomorphic mapped types
+    - Homomorphic (preserves modifiers): Works directly on keyof T:
+    - Example:
+    type Partial<T> = {
+        [K in keyof T]?: T[K];
+    };
+    - Non-homomorphic (does NOT preserve structure): When mapping over custom unions or transformed keys:
+    - Example:
+    type Example<T> = {
+        [K in "a" | "b"]: T;
+    };
+
+6. Recursive mapped types (deep transformations)
+    - DeepReadonly:
+    type DeepReadonly<T> = {
+        readonly [K in keyof T]: T[K] extends object
+        ? DeepReadonly<T[K]>
+        : T[K];
+    };
+    - DeepPartial:
+    type DeepPartial<T> = {
+    [K in keyof T]?: T[K] extends object
+        ? DeepPartial<T[K]>
+        : T[K];
+    };

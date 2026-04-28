@@ -1,0 +1,22 @@
+1. What is Iterators:
+    - An iterator is an object that defines a sequence and potentially a return value upon its termination.
+    - It implements the Iterator protocol by having a next() method that returns an object with two properties: value (the next value in the sequence) and done (a boolean indicating whether the sequence has ended).
+    - An iterator is an object that lets you traverse a collection one element at a time.
+    - It follows a standard structure: it must have a next() method that returns:
+    { value: T, done: boolean }
+
+2. What is Generators:
+    - A generator is a special type of function that can be paused and resumed. 
+    - It is defined using the function* syntax and uses the yield keyword to produce a sequence of values.
+    - Generators can also be used to create iterators. 
+    - When a generator function is called, it returns an iterator that can be used to iterate through the values produced by the generator.
+    - A generator is a simpler way to create iterators using a special function syntax.
+    - You define it with function* and use yield.
+
+
+Key Differences
+Feature	        Iterator	            Generator
+Definition	    Object with next()	    function*
+Complexity	    Manual state handling	Automatic state handling
+Syntax	        Verbose	                Clean & concise
+Use case	    Low-level control	    Most practical scenarios

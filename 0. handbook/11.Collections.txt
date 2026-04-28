@@ -1,0 +1,12 @@
+1. What is collections:
+    - In TypeScript, “collections” usually refers to ways of storing and managing groups of data. TypeScript doesn’t introduce entirely new collection types beyond JavaScript, but it adds strong typing on top of them, which is where the real power comes in.
+
+    Types:
+    - Arrays
+    - Sets
+    - Maps
+    - Tuples
+    - Objects
+    - Readonly Collections
+    - Utilities
+

@@ -28,11 +28,3 @@ const fetchData = async () => {
         }
     }
 }
-
-// # Pending
-// - Collections
-// - Iterators 
-// - Generators
-// - Modules
-// - Decorators
-// - Testing & Debugging

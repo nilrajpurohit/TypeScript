@@ -1,0 +1,34 @@
+1. What is Modules:
+    - In TypeScript, modules are a way to organize code into separate files and control what gets shared between them. They help you keep code clean, reusable, and maintainable.
+    - Any file that uses export or import is treated as a module.
+
+2. Types of Modules in TypeScript:
+    1. ES Modules (Modern)
+    Use import / export
+    Recommended for most projects
+    2. CommonJS (Node.js style)
+    const fs = require("fs");
+    module.exports = {};
+
+3. Types of Exports:
+    - Named Exports: You can export multiple things from a file.
+    - Default Export: A module can have one default export.
+    - Mixed Exports: A module have both Named & Default Exports
+
+4. What is Re-exporting:
+    - You can forward exports from another module: export { add } from "./math";
+
+5. Module Resolution:
+    - TypeScript needs to know how to find modules.
+    - Common settings in tsconfig.json:
+    {
+        "compilerOptions": {
+            "module": "ESNext",
+            "moduleResolution": "Node"
+        }
+    }
+6. Why Modules Matter:
+    - Avoid global scope pollution
+    - Improve code organization
+    - Enable reuse
+    - Help with large-scale applications
