@@ -1,0 +1,168 @@
+1. How tsconfig.json Works:
+    - It’s the configuration file for the TypeScript compiler (tsc).
+    - It tells TypeScript:
+    - what files to compile
+    - how strict to be
+    - what JavaScript output to generate
+    - how modules should work
+
+2. How to Create It
+    - Auto-generate: tsc --init
+    - Create manually
+    {
+        "compilerOptions": {},
+        "include": ["src"],
+        "exclude": ["node_modules"]
+    }
+
+3. Core Structure:
+    - Typescript core structure:
+    {
+        "compilerOptions": { ... },
+        "include": [],
+        "exclude": [],
+        "files": [],
+        "extends": ""
+    }
+
+4. compilerOptions (Main Section)
+    - This is where most of the power lives.
+    
+4.1 Module & Output Settings:
+
+    - traget: What JS version to compile to:
+    - "target": "ES2020"
+    - options: ES5, ES6 (ES2015), ES2020, ESNext
+
+    - module: How imports/exports work:
+    - "module": "CommonJS"
+    - Common values:
+    - CommonJS (Node.js)
+    - ESNext (modern apps, bundlers)
+    - NodeNext (modern Node)
+
+    - outDir: Where compiled JS goes:
+    - "outDir": "./dist"
+
+    - rootDir: Where your source code lives:
+    - "rootDir": "./src"
+
+    - removeComments:
+    - "removeComments": true
+
+    - sourceMap: Debug support
+    - "sourceMap": true
+
+4.2 Type Checking (VERY IMPORTANT)
+    - strict: Enables all strict checks below.
+    - "strict": true
+
+4.3 Individual strict flags:
+    - noImplicitAny: Errors when type is unclear.
+    - "noImplicitAny": true
+
+    - strictNullChecks: null and undefined must be handled explicitly.
+    - "strictNullChecks": true
+
+    - strictFunctionTypes: Checks function compatibility.
+    
+    - strictBindCallApply: Safer .bind, .call, .apply.
+
+    - alwaysStrict: Adds "use strict" in JS.
+
+4.4 Type Inference & Safety
+    - noUnusedLocals: 
+    - "noUnusedLocals": true
+
+    - noUnusedParameters:
+    - "noUnusedParameters": true
+
+    - noImplicitReturns
+    - "noImplicitReturns": true
+
+    - noFallthroughCasesInSwitch
+    - "noFallthroughCasesInSwitch": true
+
+4.5 Module Resolution
+    - moduleResolution:
+    - "moduleResolution": "Node"
+    - Options:
+    - Node
+    - NodeNext
+    - Bundler
+
+    - baseUrl
+    - "baseUrl": "./src"
+
+    - paths (aliases)
+    - "paths": {
+        "@utils/*": ["utils/*"]
+    }
+
+4.6 Interop & Compatibility
+    - esModuleInterop: Fixes import issues between CommonJS & ES modules.
+    - "esModuleInterop": true
+
+    - allowSyntheticDefaultImports: 
+    - "allowSyntheticDefaultImports": true
+
+4.7 JavaScript Support
+    - allowJs: Compile .js files too.
+    - "allowJs": true
+
+    - checkJs: Type-check JS files.
+    - "checkJs": true
+
+4.8 Declaration Files
+    - declaration: Generates .d.ts files.
+    - "declaration": true
+
+    - emitDeclarationOnly: Only output types, no JS.
+    - "emitDeclarationOnly": true
+
+4.9 JSON Support
+    - resolveJsonModule: Allows importing .json.
+    - "resolveJsonModule": true
+
+4.10 Performance
+    - skipLibCheck: Skips type checking in node_modules.
+    - "skipLibCheck": true
+
+    - incremental: Faster builds.
+    - "incremental": true
+
+4.11 File Selection
+    - include: Which files to compile.
+    - "include": ["src"]
+
+    - exclude:
+    - "exclude": ["node_modules", "dist"]
+
+    - files:
+    - "files": ["index.ts"]
+
+    - extends: Reuse configs:
+    - "extends": "./base.json"
+
+5. Good Default Setup Example:
+    - Example:
+    {
+        "compilerOptions": {
+            "target": "ES2020",
+            "module": "NodeNext",
+            "rootDir": "./src",
+            "outDir": "./dist",
+
+            "strict": true,
+            "noUnusedLocals": true,
+            "noUnusedParameters": true,
+
+            "esModuleInterop": true,
+            "resolveJsonModule": true,
+
+            "skipLibCheck": true,
+            "incremental": true
+        },
+        "include": ["src"],
+        "exclude": ["node_modules"]
+    }

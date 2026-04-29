@@ -59,11 +59,3 @@
     // { protocol: "https", domain: "example.com" }
 
 
-
-- TypeScript
-- Docker 
-- Nest.js & Node.js
-- Next.js & React.js
-- CI/CD (GitHub Actions, Jenkins)
-- Kubernetes
-- AWS

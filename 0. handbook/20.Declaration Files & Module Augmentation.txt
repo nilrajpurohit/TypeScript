@@ -1,0 +1,67 @@
+1. What .d.ts Files Actually Are:
+    - A .d.ts file is a type-only file—it describes shapes but produces zero runtime code.
+    - Example: declare function greet(name: string): string;
+
+2. Using @types/* Packages:
+    - For plain JavaScript libraries, the community (via DefinitelyTyped) provides type definitions.
+    - Example: npm install --save-dev @types/lodash
+
+3. Handling Untyped Libraries
+    - If no types exist, you can declare the module yourself:
+    - Example:
+    declare module "some-legacy-lib" {
+        export function doSomething(x: number): string;
+    }
+    declare module "some-legacy-lib";
+
+4. Ambient Declarations:
+    - These define types globally or for modules without imports.
+    - Example:
+    declare global {
+        interface Window {
+            myCustomProp: string;
+        }
+    }
+
+5. Module Scope:
+    - Example:
+    declare module "my-lib" {
+        xport const version: string;
+    }
+
+6. Namespaces (older pattern, still used in some libs):
+    - declare namespace MyLib {
+        function init(): void;
+    }
+
+7. Module Augmentation (Extending Existing Types):
+    - This is where things get interesting.
+    - You can add new types to an existing module without modifying its source.
+    - Example:
+    import "express";
+    declare module "express" {
+        interface Request {
+            user?: { id: string };
+        }
+    }
+    req.user?.id
+
+8. Real Use Case: Fixing Missing Types:
+    - Sometimes a library’s types are incomplete. Instead of hacking node_modules, you augment:
+    - Example:
+    declare module "some-lib" {
+        interface Config {
+            newOption?: boolean;
+        }
+    }
+
+9. Typing JSON Imports
+    - Enable this in tsconfig.json:
+    - Example:
+    {
+        "compilerOptions": {
+            "resolveJsonModule": true
+        }
+    }
+    import config from "./config.json";
+    config.apiUrl; // fully typed

@@ -1,0 +1,35 @@
+1. What infer does:
+    - The infer keyword lets you capture a type from within another type while using a conditional type.
+    - Example:
+    type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+    type A = MyReturnType<() => string>;  // string
+    type B = MyReturnType<(x: number) => boolean>; // boolean
+
+2. Unwrapping a Promise
+    - Example:
+    type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+    type A = UnwrapPromise<Promise<number>>; // number
+    type B = UnwrapPromise<string>;         // string
+
+3. Extract Array Element Type
+    - Example:
+    type ElementType<T> = T extends (infer U)[] ? U : never;
+    type A = ElementType<number[]>; // number
+    type B = ElementType<string[]>; // string
+
+4. Multiple infer (Destructuring Types)
+    - Example:
+    type FunctionParts<T> = T extends (arg: infer A) => infer R ? [A, R] : never;
+    type A = FunctionParts<(x: number) => string>;// [number, string]
+
+5. Tuple Destructuring
+    - Example:
+    type First<T> = T extends [infer F, ...any[]] ? F : never;
+    type Last<T> = T extends [...any[], infer L] ? L : never;
+    type A = First<[1, 2, 3]>; // 1
+    type B = Last<[1, 2, 3]>;  // 3
+
+6. Advanced: Recursive Unwrapping
+    - Example:
+    type DeepUnwrap<T> = T extends Promise<infer U> ? DeepUnwrap<U> : T;
+    type A = DeepUnwrap<Promise<Promise<string>>>; // string

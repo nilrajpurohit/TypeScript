@@ -1,0 +1,94 @@
+1. Discriminated Unions: The Pattern
+    - A discriminated union is a union of object types that all share a common literal field (the discriminant).
+    - Example:
+    type Shape =
+    | { kind: "circle"; radius: number }
+    | { kind: "square"; size: number }
+    | { kind: "rectangle"; width: number; height: number };
+
+2. Automatic Narrowing:
+    - Example:
+    function area(shape: Shape): number {
+        switch (shape.kind) {
+            case "circle":
+            return Math.PI * shape.radius ** 2;
+
+            case "square":
+            return shape.size ** 2;
+
+            case "rectangle":
+            return shape.width * shape.height;
+        }
+    }
+
+3. Exhaustive Checking with never:
+    - Here’s where it gets powerful. You can force TypeScript to ensure all cases are handled.
+    - Example:
+    function area(shape: Shape): number {
+        switch (shape.kind) {
+            case "circle":
+            return Math.PI * shape.radius ** 2;
+
+            case "square":
+            return shape.size ** 2;
+
+            case "rectangle":
+            return shape.width * shape.height;
+
+            default: {
+            const _exhaustiveCheck: never = shape;
+            return _exhaustiveCheck;
+            }
+        }
+    }
+
+4. Cleaner Pattern (Helper Function)
+    - Some people prefer this reusable helper:
+    - Example:
+    function assertNever(x: never): never {
+        throw new Error("Unexpected object: " + x);
+    }
+    function area(shape: Shape): number {
+        switch (shape.kind) {
+            case "circle":
+            return Math.PI * shape.radius ** 2;
+
+            case "square":
+            return shape.size ** 2;
+
+            case "rectangle":
+            return shape.width * shape.height;
+
+            default:
+            return assertNever(shape);
+        }
+    }
+
+    - Reducers (Redux-style):
+    type Action =
+    | { type: "increment"; amount: number }
+    | { type: "decrement"; amount: number };
+    function reducer(state: number, action: Action): number {
+        switch (action.type) {
+            case "increment":
+            return state + action.amount;
+
+            case "decrement":
+            return state - action.amount;
+
+            default:
+            return assertNever(action);
+        }
+    }
+
+    - State Machines:
+    type State =
+    | { status: "idle" }
+    | { status: "loading" }
+    | { status: "success"; data: string }
+    | { status: "error"; error: Error };
+
+    - Command Handlers / APIs:
+    type Command =
+    | { type: "createUser"; name: string }
+    | { type: "deleteUser"; id: number };
