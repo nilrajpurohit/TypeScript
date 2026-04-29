@@ -1,0 +1,61 @@
+1. What are Template Literal Types:
+    - They let you build string-based types using template syntax, just like runtime template strings.
+    - Example:
+    type EventName = `on${string}`;
+    const a: EventName = "onClick";   // ✅
+    const b: EventName = "onHover";   // ✅
+    const c: EventName = "click";     // ❌
+
+2. Combining unions inside templates:
+    - Template literals distribute over unions automatically:
+    - Example:
+    type Button = "click" | "hover";
+    type Event = `on${Capitalize<Button>}`; // "onClick" | "onHover"
+
+3. Built-in string manipulation types:
+    - TypeScript provides helpers for transforming string types:
+    - Example:
+    type A = Uppercase<"hello">;       // "HELLO"
+    type B = Lowercase<"HELLO">;       // "hello"
+    type C = Capitalize<"hello">;      // "Hello"
+    type D = Uncapitalize<"Hello">;    // "hello"
+
+4. Renaming keys with mapped + template literal types:
+    - This is where things become powerful:
+    - Example:
+    type Getters<T> = {
+        [K in keyof T as `get${Capitalize<string & K>}`]: T[K];
+    };
+    type User = {
+        name: string;
+        age: number;
+    };
+    type Result = Getters<User>; // {getName:string, getAge:number}
+
+5. Filtering keys with string patterns:
+    - You can also conditionally keep keys based on patterns:
+    - Example:
+    type RemovePrivate<T> = {
+        [K in keyof T as K extends `_${string}` ? never : K]: T[K];
+    };
+    type User = {
+        id: number;
+        _secret: string;
+    };
+    // { id:number }
+
+6. Parsing string shapes:
+    - Template literal types can “decode” strings:
+    - Example:
+    type ParseRoute<T> = T extends `/user/${infer Id}` ? Id : never;
+    type Id = ParseRoute<"/user/123">;
+    // "123"
+
+7. Extracting multiple parts:
+   - You can infer multiple segments:
+   - Example:
+    type ParseURL<T> = T extends `${infer Protocol}://${infer Domain}` ? { protocol: Protocol; domain: Domain } : never;
+    type Result = ParseURL<"https://example.com">;
+    // { protocol: "https", domain: "example.com" }
+
+

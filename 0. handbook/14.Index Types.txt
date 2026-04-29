@@ -1,0 +1,64 @@
+1. keyof T: 
+    - keyof get all keys of a type produces a union of its property names.
+    - Example :
+    type User = {
+        id: number;
+        name: string;
+        isAdmin: boolean;
+    };
+    type UserKeys = keyof User;
+    // "id" | "name" | "isAdmin"
+
+2. Indexed Access Types: T[K]
+    - This lets you look up the type of a property.
+    - Example:
+    type User = {
+        id: number;
+        name: string;
+    };
+    type NameType = User["name"]; 
+    // string
+
+3. keyof typeof obj (bridge runtime → type):
+    - When you have a real object and want its keys as a type:
+    - typeof gets the type of the object, then keyof extracts keys.
+    - Example
+    const config = {
+        host: "localhost",
+        port: 3000,
+    };
+    type ConfigKeys = keyof typeof config;
+    // "host" | "port"
+
+4. Enforcing value matches a property type:
+    - You can ensure a value matches the type of a specific property:
+    - User[K] ties the value type to the key.
+    - Example:
+    type User = {
+        id: number;
+        name: string;
+    };
+    function update<K extends keyof User>(
+        key: K,
+        value: User[K]
+    ) {
+        // key and value are correctly linked
+    }
+    update("name", "Alice"); // ✅
+    update("id", 123);       // ✅
+    update("id", "wrong");   // ❌ Error
+
+5. Combining keyof with Generics:
+    - This is the most powerful pattern:
+    - Guarantees:
+        Only valid keys can be used
+        Return type matches the selected property
+    - Example:
+    function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+        return obj[key];
+    }
+    const user = { id: 1, name: "Alice" };
+    const name = getProperty(user, "name"); 
+    // inferred as string
+    const id = getProperty(user, "id"); 
+    // inferred as number

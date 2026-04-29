@@ -1,0 +1,26 @@
+1. What is Decorators:
+    - In TypeScript, decorators are a special kind of function used to add metadata or modify behavior of classes and their members (methods, properties, parameters) without changing their actual code.
+    - Think of them as wrappers or annotations that enhance functionality.
+    - A decorator is written with @ and placed above what it modifies:
+    - Example :
+    @MyDecorator
+    class MyClass {}
+    - Enable Decorators: You must enable them in tsconfig.json
+    {
+        "experimentalDecorators": true
+    }
+
+2. Types of Decorators:
+    - Class Decorator
+    - Method Decorator
+    - Property Decorator
+    - Parameter Decorator
+    - Accessor Decorator
+
+4. Real-World Use Cases:
+    - Decorators are heavily used in frameworks like Angular and NestJS:
+    - Dependency Injection (@Injectable)
+    - Routing (@Controller, @Get)
+    - Validation
+    - Logging
+    - Authorization

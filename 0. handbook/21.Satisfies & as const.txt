@@ -1,0 +1,51 @@
+1.Satisfies & as const
+    - This is one of those TypeScript combos that quietly makes your code much safer without adding noise.
+
+2. as const: Lock Values to Literal Types
+    - By default, TypeScript widens values:
+
+    - Example:
+    const status = "success";
+    // type: string ❌ (too broad)
+
+    - With as const:
+    const status = "success" as const;
+    // type: "success" ✅ (exact literal)
+
+    - Objects and arrays
+    const config = {
+        mode: "dark",
+        retry: 3
+    } as const;
+
+3. satisfies: Validate Without Losing Precision (TS 4.9+)
+    - Normally, if you annotate a type, you lose literal specificity:
+    
+    - Example:
+    type Config = {
+        mode: "dark" | "light";
+        retry: number;
+    };
+    const config: Config = {
+        mode: "dark",
+        retry: 3
+    };
+    // mode becomes "dark" | "light" ❌ (widened)
+
+    - With satisfies:
+    const config = {
+        mode: "dark",
+        retry: 3
+    } satisfies Config;
+
+4. Combine as const + satisfies (Best Pattern)
+    - Example :
+    type Routes = {
+        home: string;
+        about: string;
+    };
+
+    const routes = {
+        home: "/",
+        about: "/about"
+    } as const satisfies Routes;
